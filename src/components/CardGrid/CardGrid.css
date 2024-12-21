@@ -1,0 +1,8 @@
+/* Card Grid Container */
+.card-grid {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 24px; /* Space between cards */
+    padding: 32px; /* Padding around the grid */
+    justify-items: center; /* Centers cards horizontally */
+}
