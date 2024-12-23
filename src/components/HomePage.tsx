@@ -2,10 +2,12 @@ import React from "react";
 import ScrollSection from "./ScrollSection/ScrollSection.tsx";
 import Footer from "./Footer/Footer.tsx";
 import CardGrid from "./CardGrid/CardGrid.tsx";
+import Navbar from "./Navbar/Navbar.tsx";
 
 const HomePage: React.FC = () => {
     return (
         <div>
+            <Navbar />
             <ScrollSection
                 videoPath="/assets/demo.mp4"
                 title="Learn Sensual Bachata"
@@ -16,7 +18,7 @@ const HomePage: React.FC = () => {
             <CardGrid />
             <ScrollSection
                 videoPath="/assets/lalo_combo.mp4"
-                title="What We Offer (Core Services)"
+                title="Need more 1-1 time?"
                 description="Sign up for a private!"
                 buttonText="Sign Up Now"
             />

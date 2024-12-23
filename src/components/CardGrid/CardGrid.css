@@ -1,3 +1,17 @@
+.card-grid-header {
+    font-size: 24px;
+    color: #000;
+    margin-bottom: 2px;
+    font-weight: bold;
+}
+
+.card-grid-subheader {
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
 /* Card Grid Container */
 .card-grid {
     display: grid; /* Use CSS Grid for layout */
