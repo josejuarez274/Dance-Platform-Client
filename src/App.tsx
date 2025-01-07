@@ -1,13 +1,21 @@
-import React from 'react';
-//import logo from './logo.svg';
+import React, {useContext} from 'react';
+
+import HomePage from "components/HomePage/HomePage";
+
+import AuthProvider from "providers/Auth/AuthProvider";
+import UserProvider from "providers/User/UserProvider";
+
 import './App.css';
-import HomePage from "./components/HomePage.tsx";
 
 function App() {
   return (
-    <div className="App">
-      <HomePage />
-    </div>
+      <AuthProvider>
+       <UserProvider >
+        <div className="App">
+          <HomePage />
+        </div>
+       </UserProvider>
+      </AuthProvider>
   );
 }
 

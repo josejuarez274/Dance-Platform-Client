@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "moduleResolution": "node",
+    "resolveJsonModule":  true,
+    "types": ["jest", "node"],
+    "skipLibCheck":  true,
+    "baseUrl": "./src",
+    "paths": {
+      /**PATH **/ /**ALIAS**/
+      "/api/*": ["api/*"],
+      "/providers/*": ["providers/*"],
+      "/components/*": ["components/*"]
+    },
+    "esModuleInterop": true,
+  },
+  "exclude": ["node_modules"]
+}

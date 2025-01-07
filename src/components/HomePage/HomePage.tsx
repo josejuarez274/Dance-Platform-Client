@@ -1,8 +1,9 @@
 import React from "react";
-import ScrollSection from "./ScrollSection/ScrollSection.tsx";
-import Footer from "./Footer/Footer.tsx";
-import CardGrid from "./CardGrid/CardGrid.tsx";
-import Navbar from "./Navbar/Navbar.tsx";
+
+import ScrollSection from "../shared/ScrollSection/ScrollSection";
+import Footer from "./Footer/Footer";
+import CardGrid from "./CardGrid/CardGrid";
+import Navbar from "../Navbar/Navbar";
 
 const HomePage: React.FC = () => {
     return (

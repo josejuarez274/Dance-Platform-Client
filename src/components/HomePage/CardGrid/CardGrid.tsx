@@ -1,5 +1,5 @@
 import React from "react";
-import Card, { CardProps } from "../Card/Card.tsx";
+import Card, { CardProps } from "../../shared/Card/Card";
 import "./CardGrid.css";
 
 const cardsData: Array<CardProps> = [
