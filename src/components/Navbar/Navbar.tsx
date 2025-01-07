@@ -1,42 +1,104 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
+
+import Login from "components/Navbar/Login/Login";
+import Register from "components/Navbar/Register/Register";
+
+import AuthContext from "providers/Auth/AuthContext";
+import UserContext from "providers/User/UserContext";
+
 import "./Navbar.css";
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const toggleLogin = () => {
+        setIsLoginOpen(!isLoginOpen);
+        setIsRegisterOpen(false);
+    };
+    const toggleRegister = () => {
+        setIsRegisterOpen(!isRegisterOpen);
+        setIsLoginOpen(false);
+    };
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setIsMenuOpen(!isMenuOpen);
     };
 
+    const { user, setUser } = useContext(UserContext);
+    const { token, setToken } = useContext(AuthContext);
+
     return (
-        <nav className="navbar">
-            {/* Logo */}
-            <div className="navbar-logo">
-                <a href="/">Ascend Studios</a>
-            </div>
+        <>
+            <nav className="navbar">
+                {/* Logo */}
+                <div className="navbar-logo">
+                    <a href="/">Ascend Studios</a>
+                </div>
 
-            {/* Menu for larger screens */}
-            <ul className={`navbar-links ${isOpen ? "active" : ""}`}>
-                <li><a href="#classes">Classes</a></li>
-                <li><a href="#privates">Privates</a></li>
-                <li><a href="#rewards">Rewards</a></li>
-                <li><a href="#events">Events</a></li>
-            </ul>
+                {/* Hamburger Menu */}
+                <div className="navbar-toggle" onClick={toggleMenu}>
+                    <div className="bar"></div>
+                    <div className="bar"></div>
+                    <div className="bar"></div>
+                </div>
 
-            {/* Call-to-Actions */}
-            <div className="navbar-cta">
-                <a href="#login" className="btn">Login</a>
-                <a href="#signup" className="btn btn-primary">Sign Up</a>
-            </div>
+                {/* Links */}
+                <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
+                    <li><a href="#classes">Classes</a></li>
+                    <li><a href="#privates">Privates</a></li>
+                    <li><a href="#rewards">Rewards</a></li>
+                    <li><a href="#events">Events</a></li>
 
-            {/* Hamburger Menu for Mobile */}
-            <div className="navbar-toggle" onClick={toggleMenu}>
-                <span className="bar"></span>
-                <span className="bar"></span>
-                <span className="bar"></span>
-                <span className="bar"></span>
-            </div>
-        </nav>
+                    {/* Buttons in dropdown for smaller screens */}
+                    {isMenuOpen && (
+                        <div className="navbar-cta">
+                            {user ? (
+                                <div className="user-info">
+                                    <h2>Welcome</h2>
+                                    <h3>{user.email}</h3>
+                                    <button onClick={() => {
+                                        setUser(null);
+                                        setToken(null);
+                                    }} className="btn">Logout</button>
+                                </div>
+                            ) : (
+                                <>
+                                    <button onClick={toggleLogin} className="btn">Login</button>
+                                    <a href="#signup" className="btn btn-primary" onClick={toggleRegister}>Register</a>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </ul>
+
+                {/* Buttons for wider screens */}
+                {!isMenuOpen && (
+                    <div className="navbar-cta">
+                        {user ? (
+                            <div className="user-info">
+                                <h2>Welcome</h2>
+                                <h3>{user.email}</h3>
+                                <button onClick={() => {
+                                    setUser(null);
+                                    setToken(null);
+                                }} className="btn">Logout</button>
+                            </div>
+                        ) : (
+                            <>
+                                <button onClick={toggleLogin} className="btn">Login</button>
+                                <a href="#signup" className="btn btn-primary" onClick={toggleRegister}>Register</a>
+                            </>
+                        )}
+                    </div>
+                )}
+            </nav>
+
+            {/* Render Login Modal */}
+            {isLoginOpen && <Login onClose={toggleLogin} />}
+            {/* Render Register Modal */}
+            {isRegisterOpen && <Register onClose={toggleRegister} />}
+        </>
     );
 };
 
