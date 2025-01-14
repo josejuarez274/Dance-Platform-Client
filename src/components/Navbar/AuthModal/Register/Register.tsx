@@ -1,5 +1,16 @@
 import React, { useContext, useState } from "react";
-import { ModalOverlay, Background, Button, Form, GlassPanel, Input, SwitchText } from "../styles";
+import {
+    ModalOverlay,
+    Background,
+    Button,
+    Form,
+    GlassPanel,
+    Input,
+    SwitchText,
+    Spinner,
+    InputWrapper,
+    ToggleButton,
+} from "../../styles";
 
 import AuthService from "api/services/AuthService";
 import AuthContext from "providers/Auth/AuthContext";
@@ -9,15 +20,18 @@ import UserService from "api/services/userService";
 
 interface RegisterProps {
     onClose: () => void;
+    onLogin: () => void;
 }
 
-const Register = ({ onClose }: RegisterProps) => {
+const Register = ({ onClose, onLogin }: RegisterProps) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { setToken } = useContext(AuthContext);
     const { setUser } = useContext(UserContext);
@@ -29,6 +43,8 @@ const Register = ({ onClose }: RegisterProps) => {
             setErrorMessage("Please fill out all fields.");
             return;
         }
+
+        setLoading(true);
 
         try {
             const registerResponse = await AuthService.register({
@@ -49,6 +65,8 @@ const Register = ({ onClose }: RegisterProps) => {
             onClose();
         } catch (e) {
             setErrorMessage("Registration failed. Please try again.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -81,18 +99,29 @@ const Register = ({ onClose }: RegisterProps) => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Input
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <InputWrapper>
+                        <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <ToggleButton onClick={(e) => {
+                            e.preventDefault();
+
+                            setShowPassword(!showPassword)}
+                        }>
+                            {showPassword ? "Hide" : "Show"}
+                        </ToggleButton>
+                    </InputWrapper>
+
                     {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-                    <Button onClick={handleRegister}>
-                        <i className="fa fa-user-plus"></i> Register
+                    <Button onClick={handleRegister} disabled={loading}>
+                        { loading && <Spinner /> }
+                        { loading ? "Registering..." : "Register" }
                     </Button>
                     <SwitchText>
-                        Already have an account? <a href="#" onClick={onClose}>Login</a>
+                        Already have an account? <a href="#" onClick={onLogin}>Login</a>
                     </SwitchText>
                 </Form>
                 <Button onClick={onClose} style={{ marginTop: "20px" }}>

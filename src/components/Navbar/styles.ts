@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const ModalOverlay = styled.div`
     position: fixed;
@@ -63,19 +63,42 @@ export const GlassPanel = styled.div`
     }
 `;
 
-// Input fields
+// Wrapper for the input and show/hide toggle
+export const InputWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    margin: 15px 0;
+`;
+
 export const Input = styled.input`
-  width: 100%;
-  padding: 10px 15px;
-  margin: 15px 0;
-  border: none;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-size: 16px;
+    width: 100%;
+    padding: 10px 15px;
+    padding-right: 40px; /* Add space for the toggle button */
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
     text-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Slight glow for contrast */
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
+`;
+
+export const ToggleButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -117,4 +140,27 @@ export const SwitchText = styled.p`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+    gap: 15px;
 `;
+
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+// Spinner Component
+export const Spinner = styled.div`
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: ${spin} 0.6s linear infinite;
+  margin-right: 8px; /* Space between spinner and text */
+  display: inline-block;
+`;
+
