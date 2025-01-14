@@ -54,6 +54,7 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({ videoPath, title, descrip
                 autoPlay
                 muted
                 loop
+                playsInline
                 className="scroll-video"
                 style={{
                     transform: `scale(${1 - 0.5 * scrollProgress})`, // Shrinks gradually from scale(1) to scale(0.5)
