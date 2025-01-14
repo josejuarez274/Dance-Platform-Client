@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 
-import Login from "components/Navbar/Login/Login";
-import Register from "components/Navbar/Register/Register";
+import Login from "components/Navbar/AuthModal/Login/Login";
+import Register from "components/Navbar/AuthModal/Register/Register";
 
 import AuthContext from "providers/Auth/AuthContext";
 import UserContext from "providers/User/UserContext";
@@ -56,7 +56,7 @@ const Navbar = () => {
                             {user ? (
                                 <div className="user-info">
                                     <h2>Welcome</h2>
-                                    <h3>{user.email}</h3>
+                                    <h3>{user.firstName}</h3>
                                     <button onClick={() => {
                                         setUser(null);
                                         setToken(null);
@@ -78,7 +78,7 @@ const Navbar = () => {
                         {user ? (
                             <div className="user-info">
                                 <h2>Welcome</h2>
-                                <h3>{user.email}</h3>
+                                <h3>{user.firstName}</h3>
                                 <button onClick={() => {
                                     setUser(null);
                                     setToken(null);
@@ -95,9 +95,9 @@ const Navbar = () => {
             </nav>
 
             {/* Render Login Modal */}
-            {isLoginOpen && <Login onClose={toggleLogin} />}
+            {isLoginOpen && <Login onClose={toggleLogin} onCreateAccount={toggleRegister} />}
             {/* Render Register Modal */}
-            {isRegisterOpen && <Register onClose={toggleRegister} />}
+            {isRegisterOpen && <Register onClose={toggleRegister} onLogin={toggleLogin} />}
         </>
     );
 };
