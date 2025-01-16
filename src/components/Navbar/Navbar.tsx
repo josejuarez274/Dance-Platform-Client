@@ -1,4 +1,5 @@
 import React, {useContext, useState} from "react";
+import { Link } from "react-router-dom";
 
 import Login from "components/Navbar/AuthModal/Login/Login";
 import Register from "components/Navbar/AuthModal/Register/Register";
@@ -45,10 +46,11 @@ const Navbar = () => {
 
                 {/* Links */}
                 <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-                    <li><a href="#classes">Classes</a></li>
-                    <li><a href="#privates">Privates</a></li>
-                    <li><a href="#rewards">Rewards</a></li>
-                    <li><a href="#events">Events</a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/classes">Classes</Link></li>
+                    <li><Link to="/privates">Privates</Link></li>
+                    <li><Link to="/rewards">Rewards</Link></li>
+                    <li><Link to="/events">Events</Link></li>
 
                     {/* Buttons in dropdown for smaller screens */}
                     {isMenuOpen && (

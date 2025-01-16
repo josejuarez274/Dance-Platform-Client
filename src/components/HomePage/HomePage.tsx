@@ -3,12 +3,10 @@ import React from "react";
 import ScrollSection from "../shared/ScrollSection/ScrollSection";
 import Footer from "./Footer/Footer";
 import CardGrid from "./CardGrid/CardGrid";
-import Navbar from "../Navbar/Navbar";
 
 const HomePage: React.FC = () => {
     return (
         <div>
-            <Navbar />
             <ScrollSection
                 videoPath="/assets/demo.mp4"
                 title="Learn Sensual Bachata"
