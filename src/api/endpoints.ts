@@ -7,6 +7,10 @@ namespace API_ENDPOINTS {
         LOGIN: "/api/auth/login",
         REGISTER: "/api/auth/register"
     }
+
+    export const CLASSES = {
+        GET_MONTHLY_CLASSES: "/api/classes/thisMonth"
+    }
 }
 
 export default API_ENDPOINTS;
