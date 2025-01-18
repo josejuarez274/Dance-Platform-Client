@@ -1,35 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import {
-    MenuItem,
-    Select,
-    FormControl,
-    Box,
-    InputLabel,
-    SelectChangeEvent,
-    Stack,
-    Chip,
-} from '@mui/material';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {Box, Chip, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack,} from '@mui/material';
 import dayjs, {Dayjs} from "dayjs";
 
 import ClassesService from "api/services/ClassesService";
-import { ClassType } from 'api/types/ClassesTypes';
+import {ClassType} from 'api/types/ClassesTypes';
 
 interface SelectClassStepProps {
     selectedDate: Dayjs | null;
     selectedClassType: ClassType;
+    selectedAmount: number;
     setSelectedDate: (date: Dayjs | null) => void;
     setSelectedClassType: (type: ClassType) => void;
+    setSelectedAmount: (amount: number) => void;
 }
 
-const SelectClassStep = ({
+const SelectClassOrPass = ({
     selectedDate,
+    selectedAmount,
     selectedClassType,
     setSelectedClassType,
-    setSelectedDate }: SelectClassStepProps
+    setSelectedDate,
+    setSelectedAmount,
+                     }: SelectClassStepProps
 ) => {
     const [beginnerAvailableDates, setBeginnerAvailableDates] = useState([]);
     const [intermediateAvailableDates, setIntermediateAvailableDates] = useState([]);
@@ -94,7 +90,10 @@ const SelectClassStep = ({
                                 label="Select a date"
                                 shouldDisableDate={shouldDisableDates}
                                 value={selectedDate}
-                                onChange={(newValue) => setSelectedDate(newValue)}
+                                onChange={(newValue) => {
+                                    setSelectedDate(newValue);
+                                    setSelectedAmount(selectedClassType === ClassType.BEGINNER ? 20 : 30)
+                                }}
                             />
                                 <Stack direction="row" spacing={1} style={{ marginTop: 2}}>
                                     <Chip
@@ -104,7 +103,7 @@ const SelectClassStep = ({
                                         size="medium"
                                     />
                                     <Chip
-                                        label={`Price $25`}
+                                        label={`Price $${selectedClassType === ClassType.BEGINNER ? "20" : "30"}`}
                                         color='success'
                                     />
                                 </Stack>
@@ -115,4 +114,4 @@ const SelectClassStep = ({
     )
 };
 
-export default SelectClassStep;
+export default SelectClassOrPass;
