@@ -2,10 +2,21 @@ import { AxiosResponse } from 'axios';
 
 import axios from '../axiosConfig';
 import API_ENDPOINTS from "api/endpoints";
-import {CreatePaymentIntentResponse} from "api/types/PaymentTypes";
+import {
+    CreatePaymentIntentResponse
+} from "api/types/PaymentTypes";
+import { ClassType } from "api/types/ClassesTypes";
 
 interface PaymentInfo {
-    amount: number
+    amount: number;
+    description: string;
+    receipt_email: string;
+    metadata: {
+        userId: string;
+        classType: ClassType;
+        date: string;
+        instructor: string;
+    },
 }
 
 const PaymentService = {

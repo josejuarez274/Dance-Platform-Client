@@ -1,36 +1,53 @@
 import React, {useEffect, useState} from 'react';
 
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {Box, Chip, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack,} from '@mui/material';
-import dayjs, {Dayjs} from "dayjs";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import {
+    Box,
+    Chip,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    Stack,
+    TextField,
+} from '@mui/material';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import FireTruckIcon from '@mui/icons-material/FireTruck';
+import dayjs, { Dayjs } from "dayjs";
 
 import ClassesService from "api/services/ClassesService";
-import {ClassType} from 'api/types/ClassesTypes';
+import { ClassType } from 'api/types/ClassesTypes';
 
 interface SelectClassStepProps {
     selectedDate: Dayjs | null;
     selectedClassType: ClassType;
     selectedAmount: number;
+    selectedEmail: string;
     setSelectedDate: (date: Dayjs | null) => void;
     setSelectedClassType: (type: ClassType) => void;
     setSelectedAmount: (amount: number) => void;
+    setSelectedEmail: (email: string) => void;
 }
 
-const SelectClassOrPass = ({
+const ClassScheduler = ({
     selectedDate,
     selectedAmount,
     selectedClassType,
+    selectedEmail,
     setSelectedClassType,
     setSelectedDate,
     setSelectedAmount,
-                     }: SelectClassStepProps
+    setSelectedEmail,
+   }: SelectClassStepProps
 ) => {
     const [beginnerAvailableDates, setBeginnerAvailableDates] = useState([]);
     const [intermediateAvailableDates, setIntermediateAvailableDates] = useState([]);
 
     const handleChange = (event: SelectChangeEvent) => {
+        setSelectedAmount(event.target.value === ClassType.BEGINNER ? 20 : 30);
         setSelectedClassType(event.target.value as ClassType);
         setSelectedDate(null);
     };
@@ -88,11 +105,11 @@ const SelectClassOrPass = ({
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 label="Select a date"
+                                disabled={selectedAmount === 0}
                                 shouldDisableDate={shouldDisableDates}
                                 value={selectedDate}
                                 onChange={(newValue) => {
                                     setSelectedDate(newValue);
-                                    setSelectedAmount(selectedClassType === ClassType.BEGINNER ? 20 : 30)
                                 }}
                             />
                                 <Stack direction="row" spacing={1} style={{ marginTop: 2}}>
@@ -106,12 +123,26 @@ const SelectClassOrPass = ({
                                         label={`Price $${selectedClassType === ClassType.BEGINNER ? "20" : "30"}`}
                                         color='success'
                                     />
+                                    <Chip
+                                        label={`Difficulty`}
+                                        color='warning'
+                                        icon={ selectedClassType === ClassType.BEGINNER ? <LocalFireDepartmentIcon /> : <FireTruckIcon />}
+                                    />
                                 </Stack>
-                            </LocalizationProvider>)
-                }
+                            </LocalizationProvider>
+                    )}
+                <Box sx={{ marginTop: 4 }}>
+                    <TextField
+                        label="Email Address"
+                        fullWidth variant='filled'
+                        value={selectedEmail}
+                        onChange={(event) => setSelectedEmail(event.target.value)}
+                        type="email"
+                    />
+                </Box>
             </FormControl>
         </Box>
     )
 };
 
-export default SelectClassOrPass;
+export default ClassScheduler;

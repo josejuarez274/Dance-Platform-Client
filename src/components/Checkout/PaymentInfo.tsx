@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -11,19 +11,26 @@ import {
     CircularProgress,
 } from "@mui/material";
 
+/**
+ * To Test Different Cards Navigate to:
+ * https://docs.stripe.com/testing
+ */
+
 const stripePromise = loadStripe("pk_test_51Qi3baBG9tYGehHgln5WSTdSu0SXi1qokPCeVzBVc7UIPfIWRJ9MI6pijF59a7dT48M5q3jEJpTvXaP1w1SYeU0Q00tN4mJ4iW");
 
 interface PaymentInfo {
-    selectedAmount: number;
     clientSecret: string | null;
+    triggerPayNow: boolean;
+    setTriggerPayNow: (triggerPayNow: boolean) => void;
+    onPaymentStatusChange: (status: "succeeded" | "failed" | "processing") => void;
 }
 
 const PaymentInfo = ({
     clientSecret,
-    selectedAmount
+    triggerPayNow,
+    setTriggerPayNow,
+    onPaymentStatusChange,
 } : PaymentInfo) => {
-    const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
-
     if (!clientSecret) return (
         <Box>
             <CircularProgress />
@@ -35,36 +42,55 @@ const PaymentInfo = ({
         <div>
             {clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <PaymentForm setPaymentStatus={setPaymentStatus} />
+                    <PaymentForm
+                        onPaymentStatusChange={onPaymentStatusChange}
+                        triggerPayNow={triggerPayNow}
+                        setTriggerPayNow={setTriggerPayNow}
+                    />
                 </Elements>
             )}
-            {paymentStatus && <p>{paymentStatus}</p>}
         </div>
     );
 };
 
-const PaymentForm = ({ setPaymentStatus }: { setPaymentStatus: React.Dispatch<React.SetStateAction<string | null>> }) => {
+const PaymentForm = ({
+    onPaymentStatusChange,
+    triggerPayNow,
+    setTriggerPayNow,
+}: {
+    onPaymentStatusChange: (status: "succeeded" | "failed" | "processing") => void;
+    triggerPayNow: boolean;
+    setTriggerPayNow: (triggerPayNow: boolean) => void;
+}) => {
     const stripe = useStripe();
     const elements = useElements();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const submitPayment = async () => {
         if (!stripe || !elements) return;
 
-        const { error } = await stripe.confirmPayment({
+        const { error, paymentIntent } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: window.location.href, // Optional redirect URL
             },
+            redirect: "if_required",
         });
 
         if (error) {
-            setPaymentStatus(`Payment failed: ${error.message}`);
+            onPaymentStatusChange('failed');
+        } else if (paymentIntent?.status === 'succeeded') {
+            onPaymentStatusChange('succeeded');
         } else {
-            console.warn('*************')
-            setPaymentStatus("Payment Succeeded!");
+            onPaymentStatusChange('processing');
         }
+
+        setTriggerPayNow(false);
     };
+
+    useEffect(() => {
+        if (triggerPayNow) {
+            submitPayment();
+        }
+    }, [triggerPayNow]);
 
     return (
         <Box>
