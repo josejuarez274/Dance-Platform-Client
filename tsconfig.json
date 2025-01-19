@@ -10,7 +10,7 @@
       /**PATH **/ /**ALIAS**/
       "/api/*": ["api/*"],
       "/providers/*": ["providers/*"],
-      "/components/*": ["components/*"]
+      "/components/*": ["components/*"],
     },
     "esModuleInterop": true,
   },
