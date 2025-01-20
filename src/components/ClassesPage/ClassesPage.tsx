@@ -49,7 +49,7 @@ const ClassesPage = () => {
 
     const [selectedClassType, setSelectedClassType] = useState(ClassType.BEGINNER);
     const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-    const [selectedAmount, setSelectedAmount] = useState(20);
+    const [selectedAmount, setSelectedAmount] = useState(1);
     const [selectedEmail, setSelectedEmail] = useState('');
 
     const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -64,7 +64,7 @@ const ClassesPage = () => {
     };
     const handleBack = () => {
         if (activeStep === 1) {
-            setSelectedAmount(20);
+            setSelectedAmount(1);
             setSelectedDate(null);
             setClientSecretError(null);
         }
@@ -75,7 +75,7 @@ const ClassesPage = () => {
         setActiveStep(0);
         setSelectedClassType(ClassType.BEGINNER);
         setSelectedDate(null);
-        setSelectedAmount(20);
+        setSelectedAmount(1);
         setSelectedEmail('');
         setClientSecret(null);
         setClientSecretError(null);
