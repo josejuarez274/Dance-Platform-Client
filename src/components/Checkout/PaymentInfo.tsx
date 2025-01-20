@@ -16,7 +16,7 @@ import {
  * https://docs.stripe.com/testing
  */
 
-const stripePromise = loadStripe("pk_test_51Qi3baBG9tYGehHgln5WSTdSu0SXi1qokPCeVzBVc7UIPfIWRJ9MI6pijF59a7dT48M5q3jEJpTvXaP1w1SYeU0Q00tN4mJ4iW");
+const stripePromise = loadStripe("pk_live_51Qi3baBG9tYGehHgixBUqLVCkj3WBURoFcODMvNfOOUODfMyBziWhKr3WoxNtUyubgIlXTMxlpTMsoqOMuyYR2iX00LNhuHb1G");
 
 interface PaymentInfo {
     clientSecret: string | null;
