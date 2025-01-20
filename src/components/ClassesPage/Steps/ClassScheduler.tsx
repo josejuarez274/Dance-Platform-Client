@@ -47,7 +47,7 @@ const ClassScheduler = ({
     const [intermediateAvailableDates, setIntermediateAvailableDates] = useState([]);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setSelectedAmount(event.target.value === ClassType.BEGINNER ? 20 : 30);
+        setSelectedAmount(event.target.value === ClassType.BEGINNER ? 1 : 2);
         setSelectedClassType(event.target.value as ClassType);
         setSelectedDate(null);
     };
@@ -120,7 +120,7 @@ const ClassScheduler = ({
                                         size="medium"
                                     />
                                     <Chip
-                                        label={`Price $${selectedClassType === ClassType.BEGINNER ? "20" : "30"}`}
+                                        label={`Price $${selectedClassType === ClassType.BEGINNER ? "1" : "2"}`}
                                         color='success'
                                     />
                                     <Chip
