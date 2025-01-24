@@ -5,7 +5,7 @@ import API_ENDPOINTS from "api/endpoints";
 import {
     CreatePaymentIntentResponse
 } from "api/types/PaymentTypes";
-import { ClassType } from "api/types/ClassesTypes";
+import { ClassType } from "/api/types/ClassTypes"
 
 interface PaymentInfo {
     amount: number;
@@ -14,8 +14,8 @@ interface PaymentInfo {
     metadata: {
         userId: string;
         classType: ClassType;
-        date: string;
-        instructor: string;
+        date?: string;
+        instructor?: string;
     },
 }
 
