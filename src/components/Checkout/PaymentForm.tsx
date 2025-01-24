@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import {
+    loadStripe,
+    Stripe,
+} from "@stripe/stripe-js";
 import {
     useStripe,
     useElements,
@@ -12,25 +15,31 @@ import {
 } from "@mui/material";
 
 /**
- * To Test Different Cards Navigate to:
+ * To Test Different Testing Credit Cards Navigate to:
  * https://docs.stripe.com/testing
  */
 
-const stripePromise = loadStripe("pk_live_51Qi3baBG9tYGehHgixBUqLVCkj3WBURoFcODMvNfOOUODfMyBziWhKr3WoxNtUyubgIlXTMxlpTMsoqOMuyYR2iX00LNhuHb1G");
+let stripePromise: Promise<Stripe>;
 
-interface PaymentInfo {
+if (window.location.hostname === "localhost") {
+    stripePromise = loadStripe("pk_test_51Qi3baBG9tYGehHgln5WSTdSu0SXi1qokPCeVzBVc7UIPfIWRJ9MI6pijF59a7dT48M5q3jEJpTvXaP1w1SYeU0Q00tN4mJ4iW")
+} else {
+    stripePromise = loadStripe("pk_live_51Qi3baBG9tYGehHgixBUqLVCkj3WBURoFcODMvNfOOUODfMyBziWhKr3WoxNtUyubgIlXTMxlpTMsoqOMuyYR2iX00LNhuHb1G");
+}
+
+interface PaymentFormProps {
     clientSecret: string | null;
     triggerPayNow: boolean;
     setTriggerPayNow: (triggerPayNow: boolean) => void;
     onPaymentStatusChange: (status: "succeeded" | "failed" | "processing") => void;
 }
 
-const PaymentInfo = ({
+const PaymentForm = ({
     clientSecret,
     triggerPayNow,
     setTriggerPayNow,
     onPaymentStatusChange,
-} : PaymentInfo) => {
+} : PaymentFormProps) => {
     if (!clientSecret) return (
         <Box>
             <CircularProgress />
@@ -42,7 +51,7 @@ const PaymentInfo = ({
         <div>
             {clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                    <PaymentForm
+                    <PaymentFormHelper
                         onPaymentStatusChange={onPaymentStatusChange}
                         triggerPayNow={triggerPayNow}
                         setTriggerPayNow={setTriggerPayNow}
@@ -53,7 +62,7 @@ const PaymentInfo = ({
     );
 };
 
-const PaymentForm = ({
+const PaymentFormHelper = ({
     onPaymentStatusChange,
     triggerPayNow,
     setTriggerPayNow,
@@ -99,4 +108,4 @@ const PaymentForm = ({
     );
 };
 
-export default PaymentInfo;
+export default PaymentForm;

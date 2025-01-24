@@ -12,8 +12,16 @@ namespace API_ENDPOINTS {
         GET_MONTHLY_CLASSES: "/api/classes/thisMonth"
     }
 
+    export const PRIVATE_CLASSES = {
+        GET_MONTHLY_AVAILABLE_CLASSES: "/api/private-classes/thisMonth"
+    }
+
     export const PAYMENTS = {
         CREATE_PAYMENT_INTENT: '/api/payments/create-payment-intent'
+    }
+
+    export const BOOKINGS = {
+        CREATE_BOOKING: '/api/bookings/create-booking'
     }
 }
 
