@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
     Box,
     Button, CircularProgress,
@@ -32,13 +31,28 @@ const WizardButtons = ({
                     <Button
                         variant="contained"
                         onClick={handleNext}
-                        sx={{ mt: 1, mr: 1}}
-                        disabled={ nextDisabled }
-
-                    > {nextButtonText}
+                        sx={{
+                            mt: 1,
+                            mr: 1,
+                            color: '',
+                            background: '#000',
+                            borderRadius: '8px',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            cursor: 'pointer',
+                        }}
+                        disabled={ nextDisabled }>
+                        {nextButtonText}
                     </Button>
                 }
-            <Button disabled={backDisabled} onClick={handleBack} sx={{ mt: 1, mr: 1}}>
+            <Button
+                disabled={backDisabled}
+                onClick={handleBack}
+                sx={{
+                    mt: 1,
+                    mr: 1,
+                    color: '#000',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            }}>
                 {backButtonText || 'Back'}
             </Button>
         </Box>
