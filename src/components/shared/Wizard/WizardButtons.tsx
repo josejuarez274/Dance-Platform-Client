@@ -25,7 +25,7 @@ const WizardButtons = ({
 }: WizardButtonProps) => {
     return (
         <Box style={{ marginTop: 20 }} sx={{ mb: 2 }}>
-                {isLoading ?
+                {isLoading && nextButtonText ?
                     <CircularProgress></CircularProgress>
                     :
                     <Button

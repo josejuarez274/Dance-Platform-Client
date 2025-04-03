@@ -3,30 +3,34 @@ import React from "react";
 import ScrollSection from "../shared/ScrollSection/ScrollSection";
 import Footer from "./Footer/Footer";
 import CardGrid from "./CardGrid/CardGrid";
+import Calendly from "components/Calendly/Calendly";
+import AboutSection from "components/HomePage/AboutSection/AboutSection";
+import ServicesSection from "components/HomePage/ServicesSection/ServicesSection";
+import FAQSection from "components/HomePage/FAQSection/FAQSection";
+import TestimonialSection from "components/HomePage/TestimonialSection/TestimonialSection";
 
 const HomePage: React.FC = () => {
     return (
         <div>
             <ScrollSection
                 videoPath="/assets/demo.mp4"
-                title="Learn Sensual Bachata"
-                description="Master the art of bachata with our wide range of classes."
-                buttonText="Get Started"
+                title="Captivate Your Guests\n Elevate Your Space"
+                description="Lalo brings Latin movement fused with elegance, precision, and emotional energy — designed to awaken attention and create an unforgettable vibe."
+                buttonText="Book a Demo"
+                buttonHref="https://calendly.com/ascendstudios-art/30min"
                 isFirst={true}
             />
-            <CardGrid />
+          <ServicesSection/>
             <ScrollSection
                 videoPath="/assets/lalo_combo.mp4"
-                title="Need more 1-1 time?"
-                description="Sign up for a private!"
-                buttonText="Sign Up Now"
+                title="Benefits of a Private"
+                description="Fastest way to grow as a dancer!"
+                buttonText="Book a Private"
+                buttonHref="https://calendly.com/ascendstudios-art/private-1-on-1-sessions"
             />
-            <ScrollSection
-                videoPath="/assets/favorite_combo.mp4"
-                title="Rewards and Benefits"
-                description="Take your skills to the next level and sign up for our premium membership"
-                buttonText="Register for Premium"
-            />
+            <AboutSection />
+            <FAQSection />
+          <TestimonialSection />
             <Footer />
         </div>
     );

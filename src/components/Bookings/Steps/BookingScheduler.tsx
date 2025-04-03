@@ -51,6 +51,7 @@ interface SelectClassStepProps {
   selectedPassType: PassType;
   selectedAmount: number;
   selectedEmail: string;
+  savedEmail: string | null;
 
   setSelectedClassType: (type: ClassType) => void;
   setSelectedClass: (selectedClass: Class) => void;
@@ -72,6 +73,7 @@ const BookingScheduler = (
     selectedAmount,
     selectedPassType,
     selectedEmail,
+    savedEmail,
 
     setSelectedClassType,
     setSelectedClass,
@@ -283,15 +285,7 @@ const BookingScheduler = (
             required
             value={selectedClassType}
             onChange={handleChange}>
-            <MenuItem value={ClassType.BEGINNER}>
-              Beginner Bachata
-            </MenuItem>
-            <MenuItem value={ClassType.INTERMEDIATE}>
-              Intermediate Bachata
-            </MenuItem>
-            <MenuItem value={ClassType.PASSES}>
-              Pass
-            </MenuItem>
+
             <MenuItem value={ClassType.PRIVATE}>
               Private
             </MenuItem>
@@ -469,7 +463,7 @@ const BookingScheduler = (
               }}
               required
               variant='filled'
-              value={selectedEmail}
+              value={savedEmail || selectedEmail}
               onChange={(event) => setSelectedEmail(event.target.value)}
               type="email"
             />

@@ -11,6 +11,7 @@
       "/api/*": ["api/*"],
       "/providers/*": ["providers/*"],
       "/components/*": ["components/*"],
+      "/stateMachines/*": ["stateMachines/*"]
     },
     "esModuleInterop": true,
   },
