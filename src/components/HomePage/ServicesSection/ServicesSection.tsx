@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { FaGlassCheers, FaUserFriends } from "react-icons/fa";
+const UserIcon = FaUserFriends as unknown as React.FC<{ className?: string }>;
+const GlassIcon = FaGlassCheers as unknown as React.FC<{ className?: string }>;
+
+
 
 const ServicesSection: React.FC = () => {
   return (
@@ -22,7 +26,7 @@ const ServicesSection: React.FC = () => {
             whileHover={{ scale: 1.03 }}
             className="bg-gray-900 p-8 rounded-2xl shadow-xl text-left"
           >
-            <FaGlassCheers className="text-yellow-500 text-4xl mb-4" />
+            <GlassIcon className="text-yellow-500 text-4xl mb-4" />
             <h3 className="text-2xl font-bold mb-3">Event Performances</h3>
             <p className="text-gray-300 mb-4">
               Captivate your guests with Latin movement fused with elegance,
@@ -47,7 +51,7 @@ const ServicesSection: React.FC = () => {
             whileHover={{ scale: 1.03 }}
             className="bg-gray-900 p-8 rounded-2xl shadow-xl text-left"
           >
-            <FaUserFriends className="text-yellow-500 text-4xl mb-4" />
+            <UserIcon className="text-yellow-500 text-4xl mb-4" />
             <h3 className="text-2xl font-bold mb-3">Private Lessons</h3>
             <p className="text-gray-300 mb-4">
               Accelerate your growth with 1-on-1 guidance focused on confidence,
