@@ -21,11 +21,12 @@ function App() {
        <UserProvider>
            <Router>
                <div className="App">
-                   <Navbar />
-                   <Routes>
+                 <Navbar />
+                 <HomePage />
+                 { /* <Routes>
                        <Route path='/' element={<HomePage />} />
                        <Route path='/classes' element={<Bookings />} />
-                   </Routes>
+                   </Routes>  */}
                </div>
            </Router>
        </UserProvider>

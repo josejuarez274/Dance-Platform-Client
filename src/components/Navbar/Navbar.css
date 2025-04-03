@@ -1,78 +1,108 @@
 /* Navbar Container */
 .navbar {
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
-    justify-content: space-between; /* Spread out sections */
+    justify-content: center; /* Center everything */
     align-items: center;
-    padding: 16px 32px;
-    background-color: #000;
-    color: #fff;
+    flex-direction: column; /* Stack logo + subtext */
+    padding: 12px 24px;
+    color: var(--white);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    text-align: center;
 }
 
-/* Logo */
-.navbar-logo {
-    flex: 0 0 auto; /* Prevent shrinking or growing */
-}
-
-.navbar-logo a {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: bold;
+/* Main Logo Text */
+.navbar-logo-text {
+    color: var(--gold);
+    font-family: 'Georgia', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-decoration: none;
+    margin: 0;
+    text-shadow:
+            0 0 6px rgba(255, 255, 255, 0.3),
+            0 0 12px rgba(255, 255, 255, 0.2),
+            1px 1px 2px rgba(0, 0, 0, 0.5); /* subtle edge depth */
 }
 
-/* Links Section */
+/* Hover effect */
+.navbar-logo-text:hover {
+    border-bottom: 1px solid var(--gold);
+}
+
+/* Subtext under logo */
+.navbar-subtext {
+    font-size: 0.85rem;
+    color: var(--white);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+/* Optional Image Logo (hidden for now) */
+.navbar-logo-img {
+    height: 100px;
+    object-fit: contain;
+}
+
+/* Links section (if needed later) */
 .navbar-links {
-    flex: 1; /* Allow links section to grow */
     display: flex;
-    justify-content: center; /* Center the links */
+    justify-content: center;
     list-style: none;
     gap: 24px;
+    margin-top: 8px;
 }
 
 .navbar-links li a {
-    color: #fff;
+    color: var(--white);
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.3s;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .navbar-links li a:hover {
-    color: #3b82f6;
+    color: var(--gold);
 }
 
-/* Call-to-Actions (Buttons) */
+/* CTA Buttons (if needed later) */
 .navbar-cta {
-    flex: 0 0 auto; /* Prevent shrinking or growing */
     display: flex;
     align-items: center;
     gap: 12px;
+    margin-top: 8px;
 }
 
 .navbar-cta .btn {
     padding: 8px 16px;
-    border: 1px solid #fff;
-    border-radius: 4px;
+    border-radius: 6px;
     text-decoration: none;
-    color: #fff;
     font-size: 1rem;
-    transition: all 0.3s;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .navbar-cta .btn-primary {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
-}
-
-.navbar-cta .btn:hover {
-    background-color: #fff;
+    background-color: #f7c948;
     color: #000;
+    border: none;
 }
 
-/* Mobile Hamburger Menu */
+.navbar-cta .btn-primary:hover {
+    background-color: var(--hover-gold);
+}
+
+/* Mobile hamburger (if needed) */
 .navbar-toggle {
     display: none;
     flex-direction: column;
@@ -83,11 +113,11 @@
 .navbar-toggle .bar {
     width: 24px;
     height: 3px;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 4px;
 }
 
-/* Responsive Design */
+/* Responsive behavior */
 @media (max-width: 768px) {
     .navbar-links {
         display: none;
@@ -95,7 +125,7 @@
         position: absolute;
         top: 100%;
         right: 0;
-        background-color: #000;
+        background-color: var(--black);
         width: 100%;
         padding: 16px 0;
         align-items: center;
@@ -106,7 +136,7 @@
     }
 
     .navbar-cta {
-        display: none; /* Hide buttons on the far-right in smaller screens */
+        display: none;
     }
 
     .navbar-links .navbar-cta {
@@ -119,7 +149,7 @@
     }
 
     .navbar-links .navbar-cta .btn {
-        width: 80%;
+        width: 100%;
         text-align: center;
     }
 

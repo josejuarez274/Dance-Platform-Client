@@ -2,11 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* CORE PALETTE */
+  --primary-black: #000;
+  --black: #0d0d0d;
+  --white: #ffffff;
+  --soft-white: #f4f4f4;
+  --cream: #f7f1e1;
+
+  /* GOLD (MODERN + HOVER) */
+  --gold: #f7c948; /* Bright and modern */
+  --hover-gold: #ddb861; /* Slightly deeper for hover */
+  --accent: #e5b76d; /* Soft transition tone */
+
+  /* POWER ACCENTS */
+  --crimson: #8a0303; /* Deep, passionate red */
+  --royal-violet: #5a31a6; /* Artistic, mysterious purple */
+  --midnight-blue: #0f172a; /* Strategic, deep grounding */
+  --moon-silver: #dcdcdc; /* Subtle elite shimmer */
+
+  /* Optional hover/gradient companion */
+  --electric-indigo: #6c5ce7; /* For vibrant glow effects */
+}
+
+
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  font-family: 'Playfair Display', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

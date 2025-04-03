@@ -7,10 +7,17 @@ interface ScrollSectionProps {
     title: string;
     description: string;
     buttonText: string;
+    buttonHref: string;
     isFirst?: boolean; // Optional prop to identify the first section
 }
 
-const ScrollSection: React.FC<ScrollSectionProps> = ({ videoPath, title, description, buttonText, isFirst = false }) => {
+const ScrollSection: React.FC<ScrollSectionProps> = ({
+  videoPath,
+  title,
+  description,
+  buttonText,
+  buttonHref,
+ isFirst = false }) => {
     const [scrollProgress, setScrollProgress] = useState(0); // Tracks progress within the section
     const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -70,16 +77,33 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({ videoPath, title, descrip
 
             {/* Content */}
             <motion.div
-                className="scroll-content"
-                initial={{ opacity: 0, y: 50 }}
-                whileHover={{ scale: 1.1, rotate: 1 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+              className="scroll-content"
+              initial={{ opacity: 0, y: 50 }}
+              whileHover={{ scale: 1.1, rotate: 1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
-                <h3 className="scroll-title">{title}</h3>
+                <h3 className="scroll-title">
+                    {title.split("\\n").map((line, index) => (
+                      <React.Fragment key={index}>
+                          {line}
+                          <br/>
+                      </React.Fragment>
+                    ))}
+                </h3>
+
                 <p className="scroll-description">{description}</p>
-                <button className="scroll-button">{buttonText}</button>
+                <button
+                  className="scroll-button"
+                >
+                <a
+                      href={buttonHref}
+                      target="_blank"
+                    >
+                        {buttonText}
+                    </a>
+                </button>
             </motion.div>
         </div>
     );

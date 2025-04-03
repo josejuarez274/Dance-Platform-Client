@@ -19,7 +19,7 @@
 .scroll-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
     z-index: -10;
 }
 
@@ -33,24 +33,33 @@
 .scroll-title {
     font-size: 2.5rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    color: var(--white);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .scroll-description {
-    font-size: 1.25rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    font-weight: lighter;
+    color: var(--moon-silver); /* keep white for good readability */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    line-height: 1.6;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .scroll-button {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    background-color: #3b82f6;
-    color: white;
-    font-size: 1rem;
+    background-color: var(--gold);
+    color: var(--black);
+    font-weight: 600;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    margin-top: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .scroll-button:hover {
-    background-color: #2563eb;
+    background-color: var(--hover-gold);
 }
+

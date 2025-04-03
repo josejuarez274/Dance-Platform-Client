@@ -33,72 +33,27 @@ const Navbar = () => {
         <>
             <nav className="navbar">
                 {/* Logo */}
-                <div className="navbar-logo">
-                    <a href="/">Ascend Studios</a>
-                </div>
+                <nav className="navbar">
+                    <div className="navbar-center">
+                        <a href="/" className="navbar-logo-text">ASCEND STUDIOS</a>
+                        <p className="navbar-subtext">Power. Elegance. Rhythm.</p>
+                    </div>
+                </nav>
 
                 {/* Hamburger Menu */}
-                <div className="navbar-toggle" onClick={toggleMenu}>
+                { /* <div className="navbar-toggle" onClick={toggleMenu}>
                     <div className="bar"></div>
                     <div className="bar"></div>
                     <div className="bar"></div>
-                </div>
+                </div> */}
 
                 {/* Links */}
+                { /* }
                 <ul className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/classes">Bookings</Link></li>
-                    <li><Link to="/rewards">Rewards</Link></li>
-                    <li><Link to="/events">Events</Link></li>
-
-                    {/* Buttons in dropdown for smaller screens */}
-                    {isMenuOpen && (
-                        <div className="navbar-cta">
-                            {user ? (
-                                <div className="user-info">
-                                    <h2>Welcome</h2>
-                                    <h3>{user.firstName}</h3>
-                                    <button onClick={() => {
-                                        setUser(null);
-                                        setToken(null);
-                                    }} className="btn">Logout</button>
-                                </div>
-                            ) : (
-                                <>
-                                    <button onClick={toggleLogin} className="btn">Login</button>
-                                    <a href="#signup" className="btn btn-primary" onClick={toggleRegister}>Register</a>
-                                </>
-                            )}
-                        </div>
-                    )}
-                </ul>
-
-                {/* Buttons for wider screens */}
-                {!isMenuOpen && (
-                    <div className="navbar-cta">
-                        {user ? (
-                            <div className="user-info">
-                                <h2>Welcome</h2>
-                                <h3>{user.firstName}</h3>
-                                <button onClick={() => {
-                                    setUser(null);
-                                    setToken(null);
-                                }} className="btn">Logout</button>
-                            </div>
-                        ) : (
-                            <>
-                                <button onClick={toggleLogin} className="btn">Login</button>
-                                <a href="#signup" className="btn btn-primary" onClick={toggleRegister}>Register</a>
-                            </>
-                        )}
-                    </div>
-                )}
+                </ul> */}
             </nav>
-
-            {/* Render Login Modal */}
-            {isLoginOpen && <Login onClose={toggleLogin} onCreateAccount={toggleRegister} />}
-            {/* Render Register Modal */}
-            {isRegisterOpen && <Register onClose={toggleRegister} onLogin={toggleLogin} />}
         </>
     );
 };

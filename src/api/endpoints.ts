@@ -17,7 +17,9 @@ namespace API_ENDPOINTS {
     }
 
     export const PAYMENTS = {
-        CREATE_PAYMENT_INTENT: '/api/payments/create-payment-intent'
+        CREATE_PAYMENT_INTENT: '/api/payments/create-payment-intent',
+        SAVE_PAYMENT_METHOD: '/api/payments/save-payment-method',
+        GET_SAVED_PAYMENT_METHODS: '/api/payments/list-payment-methods'
     }
 
     export const BOOKINGS = {
