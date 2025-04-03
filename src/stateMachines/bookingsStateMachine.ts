@@ -1,4 +1,4 @@
-import { createMachine, assign } from 'xstate';
+/**import { createMachine, assign } from 'xstate';
 
 export const wizardMachine = createMachine(
   {
@@ -77,4 +77,4 @@ export const wizardMachine = createMachine(
         (context.user === null && context.selectedEmail === ""),
     }
   }
-);
+); **/
