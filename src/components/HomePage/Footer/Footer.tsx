@@ -14,13 +14,13 @@ const Footer: React.FC = () => {
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <a
-              href="#demo"
+              href="https://calendly.com/ascendstudios-art/30min"
               className="bg-yellow-500 text-black font-semibold py-2 px-6 rounded hover:bg-yellow-400 transition"
             >
               Book a Demo
             </a>
             <a
-              href="#private"
+              href="https://calendly.com/ascendstudios-art/private-1-on-1-sessions"
               className="bg-transparent border border-yellow-500 text-yellow-500 font-semibold py-2 px-6 rounded hover:bg-yellow-500 hover:text-black transition"
             >
               Sign Up for a Private
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex gap-4 font-bold">
               <a
-                href="https://instagram.com/ascend.with.lalo"
+                href="https://instagram.com/ascendwithlalo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-yellow-500"

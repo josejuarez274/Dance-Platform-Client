@@ -30,11 +30,12 @@ const AboutSection: React.FC = () => {
           <p className="text-lg md:text-xl leading-relaxed text-gray-300">
             I’m Lalo — a performer, teacher, and artist driven by movement.
             <br /><br />
-            What started as a personal passion has become a mission to awaken energy, elevate spaces, and bring elegance into rhythm. Through Latin dance, I connect with people — helping them find confidence, presence, and power in every step.
+            What began as a personal passion has evolved into Veladura — a new Latin dance style that fuses bachata with elements of ballet, tango, and ballroom. This blend elevates spaces with structure and soul, guiding others toward presence, confidence, and artistic power.
             <br /><br />
-            Ascend Studios was born from this vision — to fuse elegance, emotion, and movement into unforgettable moments.
+            Ascend Studios was born from this mission:
+            To fuse emotion, elegance, and movement into moments people never forget.
             <br /><br />
-            Whether I’m performing at an event or guiding someone in a private, my goal is always the same:
+            Whether I’m performing live or teaching a private, my goal is simple:
             <br />
             <span className="italic text-white font-semibold">Make them feel something real.</span>
           </p>
