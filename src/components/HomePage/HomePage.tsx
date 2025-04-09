@@ -14,9 +14,9 @@ const HomePage: React.FC = () => {
         <div>
             <ScrollSection
                 videoPath="/assets/demo.mp4"
-                title="Captivate Your Guests\n Elevate Your Space"
-                description="Lalo brings Latin movement fused with elegance, precision, and emotional energy — designed to awaken attention and create an unforgettable vibe."
-                buttonText="Book a Demo"
+                title="Captivate Your Guests.\n Elevate Your Space."
+                description="Lalo brings Veladura — a new style of Latin movement fused with elegance, structure, and emotional energy — designed to awaken attention and create an unforgettable vibe."
+                buttonText="Book a Free Demo"
                 buttonHref="https://calendly.com/ascendstudios-art/30min"
                 isFirst={true}
             />

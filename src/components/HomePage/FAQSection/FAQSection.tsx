@@ -10,29 +10,40 @@ const faqs: FAQItem[] = [
   {
     question: "How far in advance should I book?",
     answer:
-      "I recommend reaching out at least 2–3 weeks in advance for events. For privates, 48–72 hours works best.",
+      "For events, I recommend reaching out 2–3 weeks ahead to reserve your date. For private lessons, 48–72 hours notice works best to ensure availability.",
   },
   {
     question: "Do you travel for events?",
     answer:
-      "Yes. I’m based in Denver, Colorado but open to traveling for special events depending on availability and scope.",
+      "Yes — I’m based in Denver, Colorado, but open to traveling for special events depending on timing and scope. Let’s talk.",
   },
   {
     question: "What kind of music do you dance to?",
     answer:
-      "Mostly Latin — Bachata is my specialty but I combine it with romance from ballet, tango, and ballroom — but I customize it to match your venue’s mood or your personal taste.",
+      "Primarily Latin, with a focus on Bachata. My signature style, Veladura, blends Bachata with the romantic structure of ballet, tango, and ballroom. The vibe and song can always be tailored to your event or energy.",
   },
   {
     question: "I’m a complete beginner. Can I still take privates?",
     answer:
-      "Absolutely. My privates are made to guide you from the ground up — no experience needed.",
+      "Absolutely. Privates are designed to meet you where you are — whether it’s your first time dancing or you're returning after a break. I’ll guide you every step of the way.",
   },
   {
     question: "Can I bring a partner to my private lesson?",
     answer:
-      "Yes! You can come solo or bring a partner. I’ll help you both improve connection, technique, and flow.",
+      "Yes, you're welcome to bring a partner. Whether solo or paired, my focus is on helping you build authentic connection, emotional rhythm, and confidence on the dance floor.",
+  },
+  {
+    question: "Do you offer group classes?",
+    answer:
+      "Yes — group classes are currently in the works. I’m in the process of partnering with local studios and gyms to bring Veladura to more people. Stay tuned for updates and announcements.",
+  },
+  {
+    question: "What is Veladura?",
+    answer:
+      "Veladura is a new style of Bachata created by Lalo — fusing the sensual expression of Bachata with the structure, grace, and storytelling of ballet, tango, and ballroom. It's a layered style focused on elegance, emotional connection, and poetic movement. Each dance becomes a moment — light, layered, unforgettable.",
   },
 ];
+
 
 const FAQSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

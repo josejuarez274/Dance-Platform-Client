@@ -29,8 +29,7 @@ const ServicesSection: React.FC = () => {
             <GlassIcon className="text-yellow-500 text-4xl mb-4" />
             <h3 className="text-2xl font-bold mb-3">Event Performances</h3>
             <p className="text-gray-300 mb-4">
-              Captivate your guests with Latin movement fused with elegance,
-              rhythm, and emotional presence.
+              Captivate your guests with Veladura, a Latin fusion style that blends precision, rhythm, and emotion.
             </p>
             <p className="text-sm text-gray-400 italic mb-4">
               Ideal for restaurants, lounges, VIP events.
@@ -54,8 +53,7 @@ const ServicesSection: React.FC = () => {
             <UserIcon className="text-yellow-500 text-4xl mb-4" />
             <h3 className="text-2xl font-bold mb-3">Private Lessons</h3>
             <p className="text-gray-300 mb-4">
-              Accelerate your growth with 1-on-1 guidance focused on confidence,
-              connection, and rhythm.
+              Accelerate your growth through 1-on-1 guidance focused on confidence, connection, and emotional rhythm.
             </p>
             <p className="text-sm text-gray-400 italic mb-4">
               Perfect for individuals, couples, or beginners.

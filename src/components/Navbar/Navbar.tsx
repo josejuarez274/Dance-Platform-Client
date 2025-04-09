@@ -36,7 +36,7 @@ const Navbar = () => {
                 <nav className="navbar">
                     <div className="navbar-center">
                         <a href="/" className="navbar-logo-text">ASCEND STUDIOS</a>
-                        <p className="navbar-subtext">Power. Elegance. Rhythm.</p>
+                        <p className="navbar-subtext">Light. Layered. Unforgettable.</p>
                     </div>
                 </nav>
 
