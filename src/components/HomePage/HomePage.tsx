@@ -8,6 +8,7 @@ import AboutSection from "components/HomePage/AboutSection/AboutSection";
 import ServicesSection from "components/HomePage/ServicesSection/ServicesSection";
 import FAQSection from "components/HomePage/FAQSection/FAQSection";
 import TestimonialSection from "components/HomePage/TestimonialSection/TestimonialSection";
+import GoogleReviewsCarousel from "components/HomePage/GoogleReviews/GoogleReviews";
 
 const HomePage: React.FC = () => {
     return (
@@ -31,6 +32,7 @@ const HomePage: React.FC = () => {
             <AboutSection />
             <FAQSection />
           <TestimonialSection />
+          <GoogleReviewsCarousel />
             <Footer />
         </div>
     );
