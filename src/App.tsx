@@ -14,7 +14,6 @@ import Navbar from "components/Navbar/Navbar";
 import Bookings from "components/Bookings/Bookings";
 
 import './App.css';
-import LeaveReviewPage from "components/Review/LeaveReview/LeaveReview";
 
 function App() {
   return (
@@ -22,12 +21,12 @@ function App() {
        <UserProvider>
            <Router>
                <div className="App">
-                 { /* <Navbar />
-                 <HomePage /> */ }
-                 {  <Routes>
-                       <Route path='/' element={ <> <Navbar /> <HomePage /> </> } />
-                       <Route path='/leave-review' element={<LeaveReviewPage />} />
-                   </Routes>  }
+                 <Navbar />
+                 <HomePage />
+                 { /* <Routes>
+                       <Route path='/' element={<HomePage />} />
+                       <Route path='/classes' element={<Bookings />} />
+                   </Routes>  */}
                </div>
            </Router>
        </UserProvider>
