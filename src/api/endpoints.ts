@@ -25,10 +25,6 @@ namespace API_ENDPOINTS {
     export const BOOKINGS = {
         CREATE_BOOKING: '/api/bookings/create-booking'
     }
-
-    export const REVIEW = {
-        LEAVE_REVIEW: `/api/review-code`
-    }
 }
 
 export default API_ENDPOINTS;
