@@ -61,6 +61,7 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
                 autoPlay
                 muted
                 loop
+                preload="none"
                 playsInline
                 className="scroll-video"
                 style={{
