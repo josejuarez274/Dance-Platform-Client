@@ -1,113 +1,115 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Hls from "hls.js";
 import "./scrollSection.css";
 
 interface ScrollSectionProps {
-    videoPath: string;
-    title: string;
-    description: string;
-    buttonText: string;
-    buttonHref: string;
-    isFirst?: boolean; // Optional prop to identify the first section
+  videoPath: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonHref: string;
+  isFirst?: boolean; // Optional prop to identify the first section
 }
 
 const ScrollSection: React.FC<ScrollSectionProps> = ({
-  videoPath,
-  title,
-  description,
-  buttonText,
-  buttonHref,
- isFirst = false }) => {
-    const [scrollProgress, setScrollProgress] = useState(0); // Tracks progress within the section
-    const sectionRef = useRef<HTMLDivElement>(null);
+                                                       videoPath,
+                                                       title,
+                                                       description,
+                                                       buttonText,
+                                                       buttonHref,
+                                                       isFirst = false
+                                                     }) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (sectionRef.current) {
-                const rect = sectionRef.current.getBoundingClientRect();
-                const sectionHeight = rect.height;
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const sectionHeight = rect.height;
 
-                if (isFirst) {
-                    // For the first section, start progress only when scrolling down
-                    const firstSectionProgress = Math.min(
-                        Math.max(0, window.scrollY) / sectionHeight,
-                        1
-                    );
-                    setScrollProgress(firstSectionProgress);
-                } else {
-                    // For other sections, calculate progress based on viewport visibility
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        const normalizedProgress = Math.min(
-                            Math.max(0, window.innerHeight - rect.top) / sectionHeight,
-                            1
-                        );
-                        setScrollProgress(normalizedProgress);
-                    } else {
-                        setScrollProgress(0); // Reset when out of view
-                    }
-                }
-            }
-        };
+        if (isFirst) {
+          const firstSectionProgress = Math.min(
+            Math.max(0, window.scrollY) / sectionHeight,
+            1
+          );
+          setScrollProgress(firstSectionProgress);
+        } else {
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const normalizedProgress = Math.min(
+              Math.max(0, window.innerHeight - rect.top) / sectionHeight,
+              1
+            );
+            setScrollProgress(normalizedProgress);
+          } else {
+            setScrollProgress(0);
+          }
+        }
+      }
+    };
 
-        window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isFirst]);
 
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [isFirst]);
+  useEffect(() => {
+    if (videoRef.current) {
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoPath);
+        hls.attachMedia(videoRef.current);
+      } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+        videoRef.current.src = videoPath;
+      }
+    }
+  }, [videoPath]);
 
-    return (
-        <div className="scroll-section" ref={sectionRef}>
-            {/* Video */}
-            <motion.video
-                autoPlay
-                muted
-                loop
-                preload="none"
-                playsInline
-                className="scroll-video"
-                style={{
-                    transform: `scale(${1 - 0.5 * scrollProgress})`, // Shrinks gradually from scale(1) to scale(0.5)
-                    opacity: Math.max(1 - 0.6 * scrollProgress, 0.4), // Gradually fades to 40% opacity
-                }}
-            >
-                <source src={videoPath} type="video/mp4" />
-                <p>Your browser does not support the video tag.</p>
-            </motion.video>
+  return (
+    <div className="scroll-section" ref={sectionRef}>
+      <motion.video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="scroll-video"
+        style={{
+          transform: `scale(${1 - 0.5 * scrollProgress})`,
+          opacity: Math.max(1 - 0.6 * scrollProgress, 0.4),
+        }}
+      />
 
-            {/* Overlay */}
-            <div className="scroll-overlay"></div>
+      <div className="scroll-overlay"></div>
 
-            {/* Content */}
-            <motion.div
-              className="scroll-content"
-              initial={{ opacity: 0, y: 50 }}
-              whileHover={{ scale: 1.1, rotate: 1 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-                <h3 className="scroll-title">
-                    {title.split("\\n").map((line, index) => (
-                      <React.Fragment key={index}>
-                          {line}
-                          <br/>
-                      </React.Fragment>
-                    ))}
-                </h3>
+      <motion.div
+        className="scroll-content"
+        initial={{ opacity: 0, y: 50 }}
+        whileHover={{ scale: 1.1, rotate: 1 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <h3 className="scroll-title">
+          {title.split("\\n").map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </h3>
 
-                <p className="scroll-description">{description}</p>
-                <button
-                  className="scroll-button"
-                >
-                <a
-                      href={buttonHref}
-                      target="_blank"
-                    >
-                        {buttonText}
-                    </a>
-                </button>
-            </motion.div>
-        </div>
-    );
+        <p className="scroll-description">{description}</p>
+        <button className="scroll-button">
+          <a href={buttonHref} target="_blank">
+            {buttonText}
+          </a>
+        </button>
+      </motion.div>
+    </div>
+  );
 };
 
 export default ScrollSection;
