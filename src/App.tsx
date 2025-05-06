@@ -26,7 +26,7 @@ function App() {
                  <HomePage /> */ }
                  {  <Routes>
                        <Route path='/' element={ <> <Navbar /> <HomePage /> </> } />
-                       <Route path='/leave-review' element={<LeaveReviewPage />} />
+                       
                    </Routes>  }
                </div>
            </Router>
