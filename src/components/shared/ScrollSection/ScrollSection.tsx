@@ -9,7 +9,7 @@ interface ScrollSectionProps {
   description: string;
   buttonText: string;
   buttonHref: string;
-  isFirst?: boolean; // Optional prop to identify the first section
+  isFirst?: boolean;
 }
 
 const ScrollSection: React.FC<ScrollSectionProps> = ({
@@ -21,9 +21,11 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
                                                        isFirst = false
                                                      }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Scroll progress effect
   useEffect(() => {
     const handleScroll = () => {
       if (sectionRef.current) {
@@ -54,24 +56,46 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isFirst]);
 
+  // Lazy load + autoplay when in view
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && videoRef.current) {
+          if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(videoPath);
+            hls.attachMedia(videoRef.current);
+          } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+            videoRef.current.src = videoPath;
+          }
+          videoRef.current.play().catch(() => {});
+        }
+      },
+      { threshold: 0.5 }
+    );
+
     if (videoRef.current) {
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoPath);
-        hls.attachMedia(videoRef.current);
-      } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
-        videoRef.current.src = videoPath;
-      }
+      observer.observe(videoRef.current);
     }
+
+    return () => observer.disconnect();
   }, [videoPath]);
+
+  // Toggle mute/unmute
+  const toggleMute = () => {
+    if (videoRef.current) {
+      const newMuteState = !isMuted;
+      videoRef.current.muted = newMuteState;
+      videoRef.current.play().catch(() => {});
+      setIsMuted(newMuteState);
+    }
+  };
 
   return (
     <div className="scroll-section" ref={sectionRef}>
       <motion.video
         ref={videoRef}
-        autoPlay
-        muted
+        muted={isMuted}
         loop
         playsInline
         preload="none"
@@ -82,7 +106,11 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
         }}
       />
 
-      <div className="scroll-overlay"></div>
+      <button className="unmute-button" onClick={toggleMute}>
+        {isMuted ? "🔊 Tap for Sound" : "🔇 Mute"}
+      </button>
+
+      <div className="scroll-overlay" />
 
       <motion.div
         className="scroll-content"
@@ -103,7 +131,7 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
 
         <p className="scroll-description">{description}</p>
         <button className="scroll-button">
-          <a href={buttonHref} target="_blank">
+          <a href={buttonHref} target="_blank" rel="noopener noreferrer">
             {buttonText}
           </a>
         </button>
