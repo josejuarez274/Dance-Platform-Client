@@ -24,6 +24,7 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
                                                      }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -63,14 +64,22 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && videoRef.current) {
+          setIsLoading(true);
           if (Hls.isSupported()) {
             const hls = new Hls();
             hls.loadSource(videoPath);
             hls.attachMedia(videoRef.current);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              videoRef.current?.play().catch(() => {});
+              setIsLoading(false);
+            });
           } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
             videoRef.current.src = videoPath;
+            videoRef.current.oncanplay = () => {
+              videoRef.current?.play().catch(() => {});
+              setIsLoading(false);
+            };
           }
-          videoRef.current.play().catch(() => {});
         }
       },
       { threshold: 0.5 }
@@ -108,6 +117,12 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
           opacity: Math.max(1 - 0.6 * scrollProgress, 0.4),
         }}
       />
+
+      {isLoading && (
+        <div className="video-loading-overlay">
+          <div className="video-loading-spinner"></div>
+        </div>
+      )}
 
       <button className="unmute-button" onClick={toggleMute}>
         {isMuted ? "🔊 Tap for Sound" : "🔇 Mute"}
