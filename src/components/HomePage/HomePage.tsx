@@ -14,20 +14,22 @@ const HomePage: React.FC = () => {
     return (
         <div>
             <ScrollSection
-                videoPath="https://customer-hrqnmg2uazt18n7t.cloudflarestream.com/a358220c8f568323a515c49cc1d9505b/manifest/video.m3u8"
+                videoPath="https://customer-hrqnmg2uazt18n7t.cloudflarestream.com/798589b71671900a76990f06a86b67d3/manifest/video.m3u8"
                 title="Captivate Your Guests.\n Elevate Your Space."
                 description="Lalo brings Veladura — a new style of Latin movement fused with elegance, structure, and emotional energy — designed to awaken attention and create an unforgettable vibe."
                 buttonText="Book a Free Demo"
                 buttonHref="https://calendly.com/ascendstudios-art/30min"
                 isFirst={true}
+                posterImage="/assets/supercard.jpg"
             />
           <ServicesSection/>
             <ScrollSection
-                videoPath="https://customer-hrqnmg2uazt18n7t.cloudflarestream.com/608c28d7ec7c03143bbd3853ec444b13/manifest/video.m3u8"
+                videoPath="https://customer-hrqnmg2uazt18n7t.cloudflarestream.com/c8a850f955d0e8aea872b17dd653678c/manifest/video.m3u8"
                 title="Benefits of a Private"
                 description="Fastest way to grow as a dancer!"
                 buttonText="Book a Private"
                 buttonHref="https://calendly.com/ascendstudios-art/private-1-on-1-sessions"
+                posterImage="/assets/privates.jpg"
             />
             <AboutSection />
             <FAQSection />
