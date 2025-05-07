@@ -10,6 +10,7 @@ interface ScrollSectionProps {
   buttonText: string;
   buttonHref: string;
   isFirst?: boolean;
+  posterImage?: string;
 }
 
 const ScrollSection: React.FC<ScrollSectionProps> = ({
@@ -18,7 +19,8 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
                                                        description,
                                                        buttonText,
                                                        buttonHref,
-                                                       isFirst = false
+                                                       isFirst = false,
+                                                       posterImage
                                                      }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
@@ -99,6 +101,7 @@ const ScrollSection: React.FC<ScrollSectionProps> = ({
         loop
         playsInline
         preload="none"
+        poster={posterImage}
         className="scroll-video"
         style={{
           transform: `scale(${1 - 0.5 * scrollProgress})`,
