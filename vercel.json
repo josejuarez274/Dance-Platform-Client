@@ -18,5 +18,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://www.ascendstudios.art/api/:path*"
+    }
   ]
 }
