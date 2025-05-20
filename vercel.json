@@ -22,7 +22,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://www.ascendstudios.art/api/:path*"
+      "destination": "https://dance-platform-service-445921.uc.r.appspot.com/api/:path*"
     }
   ]
 }
